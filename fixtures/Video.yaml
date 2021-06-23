@@ -1,0 +1,7 @@
+App\Entity\Video:
+  video {0..49}:
+    title: '<title()>'
+    file: '<randomElement(["keyboard-cat.mp4","nyan-cat.mp4","taking-the-hobbits-to-isengard.mp4"])>'
+    description: '   '
+    likeCounter: '0'
+    publishedAt: '<dateTimeThisMonth()>'
