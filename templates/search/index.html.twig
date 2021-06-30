@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search for {{ search }}{% endblock %}
+
+{% block body %}
+    <h1>
+        Search for foobar
+    </h1>
+
+    <div class="row">
+        {% for video in videos %}
+            <div class="col-md-6 col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ video.title }}</h2>
+                        {% if video.description is not empty %}
+                            <p class="card-text">
+                                {{ video.description }}
+                            </p>
+                        {% endif %}
+                        </p>
+                        <a href="#" class="btn btn-primary">See the video</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

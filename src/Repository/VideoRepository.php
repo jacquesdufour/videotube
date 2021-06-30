@@ -19,32 +19,35 @@ class VideoRepository extends ServiceEntityRepository
         parent::__construct($registry, Video::class);
     }
 
-    // /**
-    //  * @return Video[] Returns an array of Video objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param string $search
+     * @return Video[]
+     */
+    public function findBySearch(string $search): array
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        // SELECT * FROM video AS v
+        $qb = $this->createQueryBuilder('v');
 
-    /*
-    public function findOneBySomeField($value): ?Video
-    {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        // Filtrer par titre de video (champ title)
+        // WHERE v.title LIKE '%recherche%'
+        $qb
+            ->where('v.title LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
         ;
+
+        // search% => commence par search
+        // %search => fini par search
+        // %search% => contient search
+
+        // SELECT * FROM video AS v WHERE v.title LIKE '%recherche%'
+
+        // ORDER BY v.publishedAt DESC
+        $qb->orderBy('v.publishedAt', 'DESC');
+        // LIMIT 10
+        $qb->setMaxResults(10);
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }
+
+
