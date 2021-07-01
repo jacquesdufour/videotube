@@ -1,6 +1,10 @@
 
 <div class="card-body">
     <h2 class="card-title">{{ video.title }}</h2>
+    <div>
+        {{ video.owner.lastName }} {{ video.owner.firstName }}
+    </div>
+
     {% if video.description is not empty %}
         <p class="card-text">
             {{ video.description }}

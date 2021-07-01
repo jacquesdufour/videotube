@@ -16,14 +16,15 @@ class VideoController extends AbstractController
      */
     public function index(Video $video, VideoRepository $videoRepository): Response
     {
-        dump($video);
-
-        // SELECT * FROM video;
-        $videos = $videoRepository->findByHome();
+        $videos = $videoRepository->findBy([
+            'owner' => $video->getOwner(),
+        ], [
+            'publishedAt' => 'DESC',
+        ], 8);
 
         return $this->render('video/index.html.twig', [
-            'videos' => $videos,
             'video' => $video,
+            'suggested_videos' => $videos,
         ]);
     }
 

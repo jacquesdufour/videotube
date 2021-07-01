@@ -3,6 +3,6 @@ App\Entity\Video:
     title: '<title()>'
     file: '<randomElement(["keyboard-cat.mp4","nyan-cat.mp4","taking-the-hobbits-to-isengard.mp4"])>'
     description: '   '
-    likeCounter: '0'
     publishedAt: '<dateTimeThisMonth()>'
     owner: '@user*'
+    userLikes: '<numberBetween(0, 30)>x @user*'
