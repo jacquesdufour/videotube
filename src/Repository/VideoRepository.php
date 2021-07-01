@@ -48,6 +48,20 @@ class VideoRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+    public function findByHome(): array
+    {
+        // SELECT * FROM video AS v
+        $qb = $this->createQueryBuilder('v');
+
+        // ORDER BY v.publishedAt DESC
+        $qb->orderBy('v.publishedAt', 'DESC');
+
+        // LIMIT 12
+        $qb->setMaxResults(12);
+
+        // SELECT * FROM video AS v WHERE v.title LIKE '%search%' ORDER BY v.publishedAt DESC LIMIT 10
+        return $qb->getQuery()->getResult();
+    }
 }
 
 

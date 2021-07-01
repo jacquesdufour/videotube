@@ -1,0 +1,11 @@
+
+<div class="card-body">
+    <h2 class="card-title">{{ video.title }}</h2>
+    {% if video.description is not empty %}
+        <p class="card-text">
+            {{ video.description }}
+        </p>
+    {% endif %}
+    <a href="{{ path('video', {'id': video.id}) }}" class="btn btn-primary mt-auto">See the video</a>
+</div>
+

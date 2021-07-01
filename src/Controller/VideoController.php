@@ -2,26 +2,29 @@
 
 namespace App\Controller;
 
+use App\Entity\Video;
 use App\Repository\VideoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+class VideoController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/video/{id}", name="video")
      */
-
-    public function index(VideoRepository $videoRepository): Response
+    public function index(Video $video, VideoRepository $videoRepository): Response
     {
+        dump($video);
 
         // SELECT * FROM video;
         $videos = $videoRepository->findByHome();
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('video/index.html.twig', [
             'videos' => $videos,
+            'video' => $video,
         ]);
     }
+
 }
